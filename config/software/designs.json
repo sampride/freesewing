@@ -48,13 +48,13 @@
     "difficulty": 3,
     "tags": ["accessories", "infants"]
   },
-  "cuthbert": {
-    "description": "A FreeSewing pattern for a cummerbund",
-    "code": "Sam Pride",
-    "design": "Sam Pride",
-    "difficulty": 2,
-    "tags": ["accessories"]
-  },
+    "cuthbert": {
+      "description": "A FreeSewing pattern for a cummerbund",
+      "code": "Sam Pride",
+      "design": "Sam Pride",
+      "difficulty": 3,
+      "tags": ["accessories"]
+    },
   "breanna": {
     "description": "A FreeSewing pattern for a basic body block for womenswear",
     "code": "Joost De Cock",
