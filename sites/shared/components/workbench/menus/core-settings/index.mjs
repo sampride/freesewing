@@ -71,23 +71,33 @@ export const CoreSettings = ({
   }
 
   return (
-    <WorkbenchMenu
-      {...{
-        config: settingsConfig,
-        control: account.control,
-        currentValues: settings,
-        DynamicDocs,
-        getDocsPath: (setting) => `site/draft/core-settings${setting ? `/${setting}` : ''}`,
-        Icon: SettingsIcon,
-        inputs,
-        language,
-        name: 'coreSettings',
-        ns,
-        passProps,
-        updateFunc: update.settings,
-        values,
-        Item: CoreSetting,
-      }}
-    />
+    <>
+      <div className="px-2">
+        {control > 4 ? (
+          <div className="border-t border-solid border-base-300 mx-36"></div>
+        ) : (
+          <>
+            <h5 className="flex flex-row gap-2 items-center">
+              <SettingsIcon />
+              <span>{t('core-settings:coreSettings')}</span>
+            </h5>
+            <p>{t('core-settings:coreSettings.d')}</p>
+          </>
+        )}
+      </div>
+      {Object.keys(settingsConfig)
+        .filter((name) => settingsConfig[name].control <= control)
+        .map((name) => (
+          <Setting
+            key={name}
+            {...{ name, design, update, t, patternConfig, loadDocs, control }}
+            config={settingsConfig[name]}
+            current={settings[name]}
+            changed={wasChanged(settings[name], name, settingsConfig)}
+            samm={typeof settings.samm === 'undefined' ? settingsConfig.samm.dflt : settings.samm}
+            units={settings.units}
+          />
+        ))}
+    </>
   )
 }

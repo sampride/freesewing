@@ -75,22 +75,37 @@ export const DesignOptions = ({
     `patterns/${design}/options${option ? '/' + option.toLowerCase() : ''}`
 
   return (
-    <WorkbenchMenu
-      {...{
-        config: optionsMenu,
-        control: account.control,
-        currentValues: settings.options,
-        DynamicDocs,
-        emojis,
-        getDocsPath,
-        Icon: OptionsIcon,
-        Item: DesignOption,
-        name: 'design-options:designOptions',
-        language,
-        ns: menuNs,
-        passProps: { settings },
-        updateFunc: (name, value) => update.settings(['options', name], value),
-      }}
-    />
+    <>
+      <div className="px-2">
+        {control > 4 ? null : (
+          <>
+            <h5 className="flex flex-row gap-2 items-center">
+              <OptionsIcon />
+              <span>{t('design-options:designOptions')}</span>
+            </h5>
+            <p>{t('design-options:designOptions.d')}</p>
+          </>
+        )}
+      </div>
+      {Object.entries(optionsMenu).map(([group, option]) =>
+        typeof option === 'string' ? (
+          <Option
+            {...{ t, design, update, settings, loadDocs }}
+            key={group}
+            name={group}
+            current={settings.options?.[group]}
+            config={patternConfig.options[group]}
+            changed={wasChanged(settings.option?.[group], patternConfig.options[group])}
+          />
+        ) : (
+          <DesignOptionGroup
+            {...{ design, patternConfig, settings, update, group, Option, t, loadDocs }}
+            options={option}
+            key={group}
+            topLevel
+          />
+        )
+      )}
+    </>
   )
 }
