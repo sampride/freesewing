@@ -18,7 +18,17 @@ import { PrintView, ns as printNs } from 'shared/components/workbench/views/prin
 import { CutView, ns as cutNs } from 'shared/components/workbench/views/cut/index.mjs'
 import { TestView, ns as testNs } from 'shared/components/workbench/views/test/index.mjs'
 
-export const ns = ['account', 'workbench', ...draftNs, ...saveNs, ...printNs, ...cutNs, ...testNs]
+export const ns = [
+  'account',
+  'workbench',
+  ...draftNs,
+  ...saveNs,
+  ...printNs,
+  ...cutNs,
+  ...editNs,
+  ...testNs,
+  ...exportNs,
+]
 
 const defaultUi = {
   renderer: 'react',

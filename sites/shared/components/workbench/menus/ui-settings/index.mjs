@@ -122,7 +122,7 @@ export const Setting = ({ name, config, current, update, t, changed, loadDocs, c
   )
 }
 
-export const UiSettings = ({ design, update, settings, ui, control, language, DynamicDocs }) => {
+export const UiSettings = ({ update, ui, control, language, DynamicDocs }) => {
   const settingsConfig = loadSettingsConfig(ui)
 
   return (
