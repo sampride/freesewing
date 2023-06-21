@@ -25,7 +25,24 @@ export const MeasiesView = ({ design, Design, settings, update }) => {
 
   return (
     <div className="m-6">
-      <h1 className="max-w-6xl m-auto text-center"> {t('changeMeasies')}</h1>
+      <h1 className="max-w-6xl m-auto text-center">{t('measurements')}</h1>
+      {missingMeasurements ? (
+        <Popout note>
+          <h5>{t('weLackSomeMeasies')}:</h5>
+          <ul className="list list-inside list-disc ml-4">
+            {missingMeasurements.map((m) => (
+              <li key={m}>{m}</li>
+            ))}
+          </ul>
+          <p>
+            <b>{t('youCanPickOrEnter')}</b>
+          </p>
+        </Popout>
+      ) : (
+        <Popout tip>
+          <h5>t{'measiesOk'}</h5>
+        </Popout>
+      )}
       <Tabs tabs={tabs}>
         <Tab key="edit">
           <MeasiesEditor {...{ Design, settings, update }} />
