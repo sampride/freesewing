@@ -1,4 +1,4 @@
-import { formatMm } from 'shared/utils.mjs'
+import { formatMm, formatFraction128, measurementAsUnits } from 'shared/utils.mjs'
 
 /*********************************************************************************************************
  * This file contains the base components to be used for displaying values in menu titles in the workbench
@@ -54,6 +54,7 @@ export const MmValue = ({ current, config, units, changed }) => (
   <HighlightedValue changed={changed}>
     <span
       dangerouslySetInnerHTML={{
+        __html: formatMm(changed ? current : config.dflt, units),
         __html: formatMm(changed ? current : config.dflt, units),
       }}
     />
