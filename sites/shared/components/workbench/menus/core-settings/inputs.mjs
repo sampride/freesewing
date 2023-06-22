@@ -47,7 +47,7 @@ export const handlers = {
     ({ updateFunc, config }) =>
     (_path, newCurrent) => {
       // convert to millimeters if there's a value
-      const sa = newCurrent === undefined ? config.dflt : newCurrent
+      newCurrent = newCurrent === undefined ? config.dflt : newCurrent
       // update both values to match
       updateFunc([
         [['samm'], newCurrent],
