@@ -4967,6 +4967,13 @@ algoliasearch-helper@^3.13.2:
   dependencies:
     "@algolia/events" "^4.0.1"
 
+algoliasearch-helper@^3.13.2:
+  version "3.13.3"
+  resolved "https://registry.yarnpkg.com/algoliasearch-helper/-/algoliasearch-helper-3.13.3.tgz#d23341fb88f490c9b2b83fc2362d1551d52117b6"
+  integrity sha512-jhbbuYZ+fheXpaJlqdJdFa1jOsrTWKmRRTYDM3oVTto5VodZzM7tT+BHzslAotaJf/81CKrm6yLRQn8WIr/K4A==
+  dependencies:
+    "@algolia/events" "^4.0.1"
+
 algoliasearch@4.17.2:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/algoliasearch/-/algoliasearch-4.17.2.tgz#ca861340e04a78da8dc5f8c5646ee38c3d8b7ec7"
