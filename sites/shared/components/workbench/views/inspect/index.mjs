@@ -3,6 +3,7 @@ import { InspectorPattern } from './inspector/pattern.mjs'
 import { DraftMenu, ns as menuNs } from './menu.mjs'
 import { objUpdate } from 'shared/utils.mjs'
 import { ViewHeader } from '../view-header.mjs'
+import { PanZoomContextProvider } from 'shared/components/workbench/pattern/pan-zoom-context.mjs'
 
 export const ns = menuNs
 
