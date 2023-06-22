@@ -2,8 +2,10 @@ import { PanZoomPattern as ShowPattern } from 'shared/components/workbench/pan-z
 import { DraftMenu, ns as menuNs } from './menu.mjs'
 import { ViewHeader, ns as headerNs } from 'shared/components/workbench/views/view-header.mjs'
 import { PanZoomContextProvider } from 'shared/components/workbench/pattern/pan-zoom-context.mjs'
+import { ViewHeader, ns as headerNs } from 'shared/components/workbench/views/view-header.mjs'
+import { PanZoomContextProvider } from 'shared/components/workbench/pattern/pan-zoom-context.mjs'
 
-export const ns = [menuNs, ...headerNs]
+export const ns = menuNs
 
 export const DraftView = ({
   design,
@@ -42,7 +44,6 @@ export const DraftView = ({
             ui,
             update,
             control: account.control,
-            setSettings,
           }}
         />
         <div className="flex flex-row">

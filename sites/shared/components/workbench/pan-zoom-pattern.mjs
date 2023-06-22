@@ -1,13 +1,15 @@
 // Dependencies
-import { forwardRef, useContext } from 'react'
+import { forwardRef, useState, useContext, useEffect } from 'react'
 // Hooks
 import { useTranslation } from 'next-i18next'
 // Context
+import { PanZoomContext } from 'shared/components/workbench/pattern/pan-zoom-context.mjs'
 import { PanZoomContext } from 'shared/components/workbench/pattern/pan-zoom-context.mjs'
 // Components
 import { SizeMe } from 'react-sizeme'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import { Pattern } from 'pkgs/react-components/src/index.mjs'
+import { ClearIcon } from 'shared/components/icons.mjs'
 
 export const ns = ['workbench']
 
@@ -35,7 +37,9 @@ export const PanZoomPattern = forwardRef((props, ref) => {
   const { t } = useTranslation(ns)
 
   const { renderProps = false, components = {} } = props
-  const { onTransformed, setZoomFunctions } = useContext(PanZoomContext)
+  const { zoomed, onTransformed, setZoomFunctions } = useContext(PanZoomContext)
+
+  if (!renderProps) return null
 
   return (
     <SizeMe refreshRate={64}>
@@ -46,13 +50,23 @@ export const PanZoomPattern = forwardRef((props, ref) => {
           wheel={{ activationKeys: ['Control'] }}
           doubleClick={{ mode: 'reset' }}
           onTransformed={onTransformed}
-          onInit={setZoomFunctions}
         >
-          <TransformComponent>
-            <div style={{ width: size.width + 'px' }} className="max-h-screen">
-              <Pattern {...{ t, components, renderProps }} ref={ref} />
-            </div>
-          </TransformComponent>
+          {({ resetTransform, zoomIn, zoomOut, instance }) => {
+            useEffect(() => {
+              if (typeof setZoomFunctions === 'function') {
+                setZoomFunctions({ resetTransform, zoomIn, zoomOut })
+                console.log('setting')
+              }
+            }, [])
+
+            return (
+              <TransformComponent>
+                <div style={{ width: size.width + 'px' }} className="max-h-screen">
+                  <Pattern {...{ t, components, renderProps }} ref={ref} />
+                </div>
+              </TransformComponent>
+            )
+          }}
         </TransformWrapper>
       )}
     </SizeMe>
