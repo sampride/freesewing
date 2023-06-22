@@ -166,11 +166,6 @@ export const WorkbenchHeader = ({ view, setView }) => {
       flex flex-col
       items-center w-full sticky top-4 lg:top-28`}
       >
-      <div
-        className={`
-      flex flex-col lg:justify-between
-      items-center w-full sticky lg:top-26`}
-      >
         <NavIcons {...{ setView, setDense, dense, view }} />
       </div>
     </header>
