@@ -44,6 +44,7 @@ export const DraftView = ({
             ui,
             update,
             control: account.control,
+            setSettings,
           }}
         />
         <div className="flex flex-row">
