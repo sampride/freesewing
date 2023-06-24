@@ -45,6 +45,7 @@ export const DraftView = ({
         <ViewHeader
           {...{
             settings,
+            setSettings,
             ui,
             update,
             control: account.control,
