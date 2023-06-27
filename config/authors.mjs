@@ -40,7 +40,6 @@ export const authors = {
 export const gitToAuthor = {
   'Joost De Cock': 'joostdecock',
   'Benjamin F': 'benjamesben',
-  'Benjamin Fan': 'benjamesben',
   SeaZeeZee: 'Zee',
   'Wouter van Wageningen': 'woutervdub',
   'bobgeorgethe3rd@googlemail.com': 'bobgeorgethe3rd',
