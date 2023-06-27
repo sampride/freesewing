@@ -35,7 +35,7 @@ Attributes.prototype.add = function (name, value) {
 }
 
 /**
- * Return a props object for attributes with a fiven prefix (typically used for data-text)
+ * Return a props object for attributes with a given prefix (typically used for data-text)
  *
  * @param {string} prefix - The prefix to filter attributes on
  * @return {object} props - The attributes as props
@@ -52,6 +52,23 @@ Attributes.prototype.asPropsIfPrefixIs = function (prefix = '') {
   }
 
   return props
+}
+
+/**
+ * Returns attributes as an object suitable for inclusion in renderprops
+ *
+ * @return {object} attributes - A plain object representing the attributes
+ */
+Attributes.prototype.asRenderProps = function () {
+  return {
+    list: this.list,
+    forSvg: this.render(),
+    forCss: this.renderAsCss(),
+    circle: this.getAsArray('data-circle'),
+    circleProps: this.asPropsIfPrefixIs('data-circle-'),
+    text: this.getAsArray('data-text'),
+    textProps: this.asPropsIfPrefixIs('data-text-'),
+  }
 }
 
 /**

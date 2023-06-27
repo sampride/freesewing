@@ -35,15 +35,18 @@ jobs:
         id: cache_node_modules
         with:
           # caching node_modules
-          path: node_modules
+          path: '**/node_modules'
           key: node_modules-${{ hashFiles('yarn.lock') }}
       - name: Install dependencies
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npx lerna bootstrap
         env:
           CI: true
-      - name: Prebuild Packages
-        run: npx lerna run prebuild
+      - name: Buil all
+        run: yarn buildall
+      # Why are we prebuilding packages?
+      #- name: Prebuild Packages
+      #  run: npx lerna run prebuild
       - name: Run eslint
         run: |
           changed_files="$(git diff --name-only origin/${{ github.base_ref }})"

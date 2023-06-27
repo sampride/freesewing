@@ -75,7 +75,6 @@ function draftFront({
   store.set('bottomrRightTaperStartX', points.bottomRightTaperStart.x)
 
   // Construct Seam
-
   paths.frontSeam = new Path()
     .move(points.top)
     .line(points.topRightTaperStart)
