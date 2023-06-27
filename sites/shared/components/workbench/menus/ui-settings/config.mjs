@@ -1,32 +1,36 @@
-import { RocketIcon, ControlIcon } from 'shared/components/icons.mjs'
-
-export const loadSettingsConfig = () => {
-  const uiSettings = {
-    control: {
-      control: 1, // Show when control > 0
-      emoji: '🖥️',
-      list: [1, 2, 3, 4, 5],
-      choiceTitles: {},
-      icon: ControlIcon,
+export const loadSettingsConfig = () => ({
+  control: {
+    control: 1, // Show when control > 0
+    list: ['1', '2', '3', '4', '5'],
+    choiceTitles: {
+      1: 'renderWithReact',
+      2: 'renderWithCore',
+      3: 'renderWithCore',
+      4: 'renderWithCore',
+      5: 'renderWithCore',
     },
-    renderer: {
-      control: 4, // Show when control > 3
-      list: ['react', 'svg'],
-      choiceTitles: {
-        react: 'renderWithReact',
-        svg: 'renderWithCore',
-      },
-      valueTitles: {
-        react: 'React',
-        svg: 'SVG',
-      },
-      dflt: 'react',
-      icon: RocketIcon,
+    valueTitles: {
+      1: 'renderWithReact',
+      2: 'renderWithCore',
+      3: 'renderWithCore',
+      4: 'renderWithCore',
+      5: 'renderWithCore',
     },
-  }
-
-  uiSettings.control.list.forEach(
-    (i) => (uiSettings.control.choiceTitles[i] = 'account:control' + i)
-  )
-  return uiSettings
-}
+    dflt: '2',
+    emoji: '🖥️',
+  },
+  renderer: {
+    control: 4, // Show when control > 3
+    list: ['react', 'svg'],
+    choiceTitles: {
+      react: 'renderWithReact',
+      svg: 'renderWithCore',
+    },
+    valueTitles: {
+      react: 'React',
+      svg: 'SVG',
+    },
+    dflt: 'react',
+    emoji: '🚀',
+  },
+})

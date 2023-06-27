@@ -1,20 +1,3 @@
-import { measurementAsMm } from 'shared/utils.mjs'
-import {
-  SaIcon,
-  ScaleIcon,
-  PaperlessIcon,
-  I18nIcon,
-  UnitsIcon,
-  DetailIcon,
-  IncludeIcon,
-  MarginIcon,
-} from 'shared/components/icons.mjs'
-
-export const defaultSamm = (units, inMm = true) => {
-  const dflt = units === 'imperial' ? 0.5 : 1
-  return inMm ? measurementAsMm(dflt, units) : dflt
-}
-
 export const loadSettingsConfig = ({
   language = 'en',
   units = 'metric',
@@ -33,15 +16,15 @@ export const loadSettingsConfig = ({
       1: 'yes',
     },
     dflt: 0,
-    icon: SaIcon,
+    emoji: '✂️',
   },
   samm: sabool
     ? {
         control: 2, // Show when control > 1
         min: 0,
-        max: units === 'imperial' ? 2 : 2.5,
-        dflt: defaultSamm(units),
-        icon: SaIcon,
+        max: 25,
+        dflt: 10,
+        step: 0.1,
       }
     : false,
   paperless: {
@@ -56,7 +39,7 @@ export const loadSettingsConfig = ({
       1: 'yes',
     },
     dflt: 0,
-    icon: PaperlessIcon,
+    emoji: '🌲',
   },
   locale: {
     control: 3, // Show when control > 2
@@ -76,12 +59,12 @@ export const loadSettingsConfig = ({
       fr: 'fr.t',
       nl: 'nl.t',
     },
-    icon: I18nIcon,
+    emoji: '🇺🇳',
   },
   units: {
-    control: 1, // Show when control > 2
+    control: 3, // Show when control > 2
     list: ['metric', 'imperial'],
-    dflt: 'metric',
+    dflt: units,
     choiceTitles: {
       metric: 'metric',
       imperial: 'imperial',
@@ -90,7 +73,7 @@ export const loadSettingsConfig = ({
       metric: 'metric',
       imperial: 'imperial',
     },
-    icon: UnitsIcon,
+    emoji: '📐',
   },
   complete: {
     control: 4, // Show when control > 3
@@ -104,14 +87,13 @@ export const loadSettingsConfig = ({
       0: 'no',
       1: 'yes',
     },
-    icon: DetailIcon,
+    emoji: '🔎',
   },
   only: {
     control: 4, // Show when control > 3
     dflt: false,
-    list: parts,
     parts,
-    icon: IncludeIcon,
+    emoji: '🛍️',
   },
   scale: {
     control: 4, // Show when control > 3
@@ -119,13 +101,14 @@ export const loadSettingsConfig = ({
     max: 5,
     dflt: 1,
     step: 0.1,
-    icon: ScaleIcon,
+    emoji: '🪆',
   },
   margin: {
     control: 4, // Show when control > 3
     min: 0,
-    max: 2.5,
-    dflt: measurementAsMm(units === 'imperial' ? 0.125 : 0.2, units),
-    icon: MarginIcon,
+    max: 25,
+    dflt: 2,
+    step: 1,
+    emoji: '🔲',
   },
 })

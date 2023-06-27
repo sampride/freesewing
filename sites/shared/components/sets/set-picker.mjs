@@ -10,22 +10,24 @@ import { useAccount } from 'shared/hooks/use-account.mjs'
 import { useBackend } from 'shared/hooks/use-backend.mjs'
 // Components
 import { SetCandidate, ns as setNs } from 'shared/components/sets/set-candidate.mjs'
+import { CuratedSetCandidate } from 'shared/components/sets/curated-set-candidate.mjs'
 import { PopoutWrapper } from 'shared/components/wrappers/popout.mjs'
 import { Tag } from 'shared/components/tag.mjs'
 import { FilterIcon } from 'shared/components/icons.mjs'
 
 export const ns = setNs
 
-export const CuratedSetPicker = ({ design, language, href, clickHandler }) => {
+export const CuratedSetPicker = ({ design, language }) => {
   // Hooks
   const { token } = useAccount()
   const backend = useBackend(token)
-  const { t, i18n } = useTranslation('sets')
+  const { t } = useTranslation('sets')
 
   // State
   const [curatedSets, setCuratedSets] = useState([])
   const [filter, setFilter] = useState([])
   const [tags, setTags] = useState([])
+  const [reload, setReload] = useState(0)
 
   // Effects
   useEffect(() => {
@@ -43,7 +45,7 @@ export const CuratedSetPicker = ({ design, language, href, clickHandler }) => {
       }
     }
     getCuratedSets()
-  }, [backend, language])
+  }, [reload])
 
   const addFilter = (tag) => {
     const newFilter = [...filter, tag]
@@ -106,9 +108,11 @@ export const CuratedSetPicker = ({ design, language, href, clickHandler }) => {
       <div className="flex flex-row flex-wrap gap-2">
         {orderBy(list, ['name'], ['asc']).map((set) => (
           <div className="w-full lg:w-96" key={set.id}>
-            <SetCandidate
+            <CuratedSetCandidate
+              href={`/new/pattern/${design}/cset/${set.id}`}
+              set={set}
               requiredMeasies={measurements[design]}
-              {...{ set, design, href, clickHandler, language: i18n.language }}
+              design={design}
             />
           </div>
         ))}
@@ -117,13 +121,14 @@ export const CuratedSetPicker = ({ design, language, href, clickHandler }) => {
   )
 }
 
-export const UserSetPicker = ({ design, t, href, clickHandler }) => {
+export const UserSetPicker = ({ design, t, language }) => {
   // Hooks
   const { token } = useAccount()
   const backend = useBackend(token)
 
   // State
   const [sets, setSets] = useState({})
+  const [list, setList] = useState([])
 
   // Effects
   useEffect(() => {
@@ -136,10 +141,14 @@ export const UserSetPicker = ({ design, t, href, clickHandler }) => {
       }
     }
     getSets()
-  })
+  }, [])
+
+  // Need to sort designs by their translated title
+  const translated = {}
+  for (const d of list) translated[t(`${d}.t`)] = d
 
   return Object.keys(sets).length < 1 ? (
-    <PopoutWrapper tip noP>
+    <PopoutWrapper tip>
       <h5>{t('patternForWhichSet')}</h5>
       <p>{t('fsmtm')}</p>
     </PopoutWrapper>
@@ -151,10 +160,7 @@ export const UserSetPicker = ({ design, t, href, clickHandler }) => {
           <div className="flex flex-row flex-wrap gap-2">
             {orderBy(sets, ['name'], ['asc']).map((set) => (
               <div className="w-full lg:w-96" key={set.id}>
-                <SetCandidate
-                  requiredMeasies={measurements[design]}
-                  {...{ set, design, href, clickHandler }}
-                />
+                <SetCandidate set={set} requiredMeasies={measurements[design]} design={design} />
               </div>
             ))}
           </div>
@@ -168,27 +174,25 @@ export const UserSetPicker = ({ design, t, href, clickHandler }) => {
   )
 }
 
-export const BookmarkedSetPicker = ({ t }) => (
+export const BookmarkedSetPicker = ({ design, t }) => (
   <>
     <h3>{t('bookmarkedSets')}</h3>
     <PopoutWrapper fixme>Implement bookmarked set picker (also implement bookmarks)</PopoutWrapper>
   </>
 )
 
-export const SetPicker = ({ design, href = false, clickHandler = false }) => {
+export const SetPicker = ({ design }) => {
   const { t, i18n } = useTranslation('sets')
   const { language } = i18n
 
-  const pickerProps = { design, t, language, href, clickHandler }
+  const pickerProps = { design, t, language }
 
   return (
     <>
       <h2>{t('chooseSet')}</h2>
       <UserSetPicker {...pickerProps} />
+      <BookmarkedSetPicker {...pickerProps} />
       <CuratedSetPicker {...pickerProps} />
     </>
   )
 }
-
-//<BookmarkedSetPicker {...pickerProps} />
-//<CuratedSetPicker {...pickerProps} />

@@ -1,7 +1,10 @@
 import { Difficulty } from 'shared/components/designs/difficulty.mjs'
-import { ListValue } from '../shared/values.mjs'
 
-export const values = {
-  renderer: ListValue,
-  control: ({ control }) => <Difficulty score={control} color="primary" />,
-}
+const ListValue = ({ current, t, config, changed }) =>
+  changed
+    ? t(`ui-settings:${config.valueTitles[current]}`)
+    : t(`ui-settings:${config.valueTitles[config.dflt]}`)
+
+export const RendererSettingValue = ListValue
+export const XRaysValue = ListValue
+export const ControlSettingValue = ({ control }) => <Difficulty score={control} color="primary" />
