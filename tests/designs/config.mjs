@@ -1,4 +1,4 @@
-import { measurements, cisFemaleAdult28 } from '@freesewing/models'
+import { measurements } from '@freesewing/models'
 import designs from '../../config/software/designs.json' assert { type: 'json' }
 import chai from 'chai'
 
